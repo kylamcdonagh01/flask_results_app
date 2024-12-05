@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block tile%}Upcoming Races{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Upcoming Races</h1>
+    {% if races %}
+        {% for race in races %}
+        <!-- next races displayed in cards for a more readable and simpler layout -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title">{{ race.description }} </h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ race.race_date }}</h6>
+            <p class="card-text">Results Pending</p>
+            <!-- save race to account if user wants to keep an eye on it -->
+            <form action="{{ url_for('save_race', race_id=race.id) }}" method="post">
+                <button class="btn btn-primary btn-sm" type="submit">Save Race</button>
+            </form>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+    <!-- message if there are no races in the future to show -->
+    <p class="mt-3">No upcoming races are scheduled at this time.</p>
+    {% endif %}
+    <!-- link back to view other races -->
+    <a href="{{ url_for('results') }}" class="btn btn-secondary mt-3">Back to All Races</a>
+</div>
+</body>
+</html>
+{% endblock %} 

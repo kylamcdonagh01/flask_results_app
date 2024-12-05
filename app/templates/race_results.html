@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block tile%}{{ race.description }} Results{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Results for {{ race.description }}</h1>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Result</th>
+                <th>Competitor Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.result }}</td>
+                <td>{{ result.competitor.first_name }} {{ result.competitor.last_name }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('results') }}" class="btn btn-secondary mt-3">Back to All Races</a>
+</div>
+</body>
+</html>
+{% endblock %}

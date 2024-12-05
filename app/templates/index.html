@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Home</h1>
+<div class="home-content">
+    <div class="description">
+        {{home.description}}
+    </div>
+
+    <!-- alternative text added for accessibility requiremnets -->
+    <div class="slideshow-container">
+        <div class="slide">
+            <img src="{{ url_for('static', filename='hobie4.png')}}" alt="Photo of boats setting up">
+        </div>
+        <div class="slide">
+            <img src="{{ url_for('static', filename='lake1.png')}}" alt="a small boat sailing on a lake">
+        </div>
+        <div class="slide">
+            <img src="{{ url_for('static', filename='lake2.png')}}" alt="Two small boast racing on a lake">
+        </div>
+    </div>
+</div>
+{% endblock %}

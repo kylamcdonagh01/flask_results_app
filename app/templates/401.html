@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block tile%}Unauthorised{% endblock %}
+
+{% block content %}
+<h1>{{ message }}</h1>
+<!-- error if the user is not logged in/ is not an admin and doesnt have access -->
+<p>You must log in to access this page. <a href="{{ url_for('login') }}">Log in here</a>.</p>
+{% endblock %}

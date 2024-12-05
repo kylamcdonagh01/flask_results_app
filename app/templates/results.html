@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block tile%}Race Results{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Results</h1>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Race</th>
+                <th>Class</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for race in races %}
+            <tr>
+                <td>{{ race.id }}</td>
+                <td>{{ race.description }}</td>
+                <td>{{ race.race_date }}</td>
+                <td>
+                    <!-- allow user to save a race to their account -->
+                    <form action="{{ url_for('save_race', race_id=race.id) }}" method="post">
+                        <button class="btn btn-primary btn-sm" type="submit">Save Race</button>
+                    </form>
+                </td>
+                <td>
+                    <!-- allow user to view results for a race -->
+                    <a href="{{ url_for('show_race_results', race_id=race.id) }}" class="btn btn-primary btn-sm">Show Results</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+{% endblock %}

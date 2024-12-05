@@ -1,0 +1,44 @@
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+.home-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.description {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+}
+
+/* Footer style */
+footer {
+    background-color: #feffff;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Slideshow style */
+.slideshow-container {
+    flex: 1;
+    max-width: 600px;
+    overflow: hidden;
+    position: relative;
+
+}
+
+.slide {
+    display: none;
+    text-align: center;
+}
+
+.slide img {
+    width: 50%;
+    height: auto;
+}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block tile%}Competitors{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% for item in competitor %}
+        <div class="card mt-5" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.first_name }} {{ item.last_name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Club: {{ item.club }}</h6>
+                <p class="card-text">Age: {{ item.age }}</p>
+                <!-- save competitor to users account page so they can follow their results easier -->
+                <form action="{{ url_for('save_competitor', competitor_id=item.id) }}" method="post">
+                    <button class="btn btn-primary btn-sm" type="submit">Save Competitor</button>
+                </form>
+                <!-- button to show a quick look at competitors results -->
+                <button 
+                    class="btn btn-info btn-sm mt-2"
+                    onclick="loadResults('{{ item.id }}')">
+                    Show Results
+                </button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- complex feature -->
+<!-- displaying competitor results in popup window -->
+<div id="results-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Competitor Results</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="results-content">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //load results into the window dynamically
+    function loadResults(competitorId) {
+        fetch(`/results/${competitorId}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('results-content').innerHTML = html;
+                var resultsModal = new bootstrap.Modal(document.getElementById('results-modal'));
+                resultsModal.show();
+            });
+    }
+</script>
+{% endblock %}

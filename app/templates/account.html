@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block tile%}Account{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- display all the races that this specific user has saved -->
+    <h2>Your Saved Races</h2>
+    {% for race in user.saved_races %}
+        <div class="card mt-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ race.description }}</h5> 
+                <form action="{{ url_for('unsave_race', race_id=race.id) }}" method="post">
+                    <button class="btn btn-primary btn-sm" type="submit">Unsave</button>
+                </form>
+                <td>
+                    <a href="{{ url_for('show_race_results', race_id=race.id) }}" class="btn btn-primary btn-sm mt-2">Show Results</a>
+                </td>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="container mt-5">
+    <!-- display all the competitors that this specific user has saved -->
+    <h2>Your Saved Competitors</h2>
+    {% for competitor in user.saved_competitors %}
+        <div class="card mt-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ competitor.first_name }} {{ competitor.last_name }}</h5> 
+                <form action="{{ url_for('unsave_competitor', competitor_id=competitor.id) }}" method="post">
+                    <button class="btn btn-primary btn-sm" type="submit">Unsave</button> <!-- option t unsave user -->
+                </form>
+                <td>
+                    <!-- view the results available for this competitor -->
+                    <a href="{{ url_for('show_competitor_results', competitor_id=competitor.id) }}" class="btn btn-primary btn-sm mt-2">Show Results</a>
+                </td>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+</html>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Login</h1>
+
+<form action="" method="post">
+    {{ form.hidden_tag() }} <!-- for CSRF protection -->
+    <div class="form-group">
+      <label for="Username">Username</label>
+      {{ form.username(class="form-control") }}
+      {% for error in form.username.errors %}
+          <span class="text-danger">{{ error }}</span> <!-- dispays validation errors -->
+      {% endfor %}
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        {{ form.password(class="form-control") }}
+        {% for error in form.password.errors %}
+            <span class="text-danger">{{ error }}</span>
+    {% endfor %}
+    </div>
+    
+    <p><input type="submit" class="btn btn-primary" value="Submit"></p>
+
+</form>
+{% endblock %}
